@@ -15,6 +15,7 @@ require 'spec_helper'
 describe User do
   before do 
     @user = User.new(:name => "Example User", :email => "user@example.com", :password => "foobar", :password_confirmation => "foobar")
+    @user.save
   end
   
   subject {@user}
@@ -26,7 +27,8 @@ describe User do
   it { should respond_to(:password) }
   it { should respond_to(:password_confirmation) }
   it { should respond_to(:authenticate) }
-  it {should_not be_valid}
+  
+  it {should be_valid}
   
   describe "when password is not present" do
     before { @user.password = @user.password_confirmation = " " }
